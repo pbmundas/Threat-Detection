@@ -1,0 +1,136 @@
+| Usecase Name                                                                     | Category                    |
+|----------------------------------------------------------------------------------|-----------------------------|
+| UBA : Bruteforce Authentication Attempts.                                        | Access and authentication   |
+| UBA : Detected Activity from a Locked Machine.                                   | Access and authentication   |
+| UBA : Executive only asset accessed by non-executive user from external network. | Access and authentication   |
+| UBA : Executive only asset accessed by non-executive user from internal network. | Access and authentication   |
+| UBA : High Risk User Access to Critical Asset.                                   | Access and authentication   |
+| UBA : Large number of denied access events towards external domain.              | Access and authentication   |
+| UBA : Multiple VPN Accounts Failed Login From Single IP.                         | Access and authentication   |
+| UBA : Multiple VPN Accounts Logged In From Single IP.                            | Access and authentication   |
+| UBA : Remote access hole in corporate firewall                                   | Access and authentication   |
+| UBA : Repeat Unauthorized Access.                                                | Access and authentication   |
+| UBA : Terminated User Activity.                                                  | Access and authentication   |
+| UBA : Unauthorized Access.                                                       | Access and authentication   |
+| UBA : Unix/Linux System Accessed With Service or Machine Account.                | Access and authentication   |
+| UBA : User Access - Failed Access to Critical Assets.                            | Access and authentication   |
+| UBA : First Access to Critical Assets.                                           | Access and authentication   |
+| UBA : User Access from Multiple Hosts.                                           | Access and authentication   |
+| UBA : User Access to Internal Server From Jump Server                            | Access and authentication   |
+| UBA : Login Anomaly.                                                             | Access and authentication   |
+| UBA : User Accessing Account from Anonymous Source.                              | Access and authentication   |
+| UBA : User Access at Unusual Times.                                              | Access and authentication   |
+| UBA : VPN Access By Service or Machine Account.                                  | Access and authentication   |
+| UBA : VPN Certificate Sharing.                                                   | Access and authentication   |
+| UBA : Windows Access with Service or Machine Account.                            | Access and authentication   |
+| UBA : Account or Group or Privileges Added.                                      | Accounts and privileges     |
+| UBA : Account or Group or Privileges Modified                                    | Accounts and privileges     |
+| UBA : DoS Attack by Account Deletion.                                            | Accounts and privileges     |
+| UBA : User Account Created and Deleted in a Short Period of Time.                | Accounts and privileges     |
+| UBA : Dormant Account Used.                                                      | Accounts and privileges     |
+| UBA : Dormant Account Use Attempted.                                             | Accounts and privileges     |
+| UBA : Expired Account Used.                                                      | Accounts and privileges     |
+| UBA : First Privilege Escalation.                                                | Accounts and privileges     |
+| UBA : New Account Use Detected.                                                  | Accounts and privileges     |
+| UBA : Suspicious Privileged Activity (First Observed Privilege Use).             | Accounts and privileges     |
+| UBA : Suspicious Privileged Activity (Rarely Used Privilege).                    | Accounts and privileges     |
+| UBA : User Attempt to Use Disabled Account.                                      | Accounts and privileges     |
+| UBA : User Attempt to Use a Suspended Account.                                   | Accounts and privileges     |
+| UBA : Browsed to Business/Service Website.                                       | Browsing behavior           |
+| UBA : Browsed to Communications Website.                                         | Browsing behavior           |
+| UBA : Browsed to Education Website.                                              | Browsing behavior           |
+| UBA : Browsed to Entertainment Website.                                          | Browsing behavior           |
+| UBA : Browsed to Gambling Website.                                               | Browsing behavior           |
+| UBA : Browsed to Government Website.                                             | Browsing behavior           |
+| UBA : Browsed to Information Technology Website.                                 | Browsing behavior           |
+| UBA : Browsed to Job Search Website.                                             | Browsing behavior           |
+| UBA : Browsed to LifeStyle Website.                                              | Browsing behavior           |
+| UBA : Browsed to Malicious Website.                                              | Browsing behavior           |
+| UBA : Browsed to Mixed Content/Potentially Adult Website.                        | Browsing behavior           |
+| UBA : Browsed to Phishing Website.                                               | Browsing behavior           |
+| UBA : Browsed to Pornography Website.                                            | Browsing behavior           |
+| UBA : Browsed to Religious Website.                                              | Browsing behavior           |
+| UBA : Browsed to Scam/Questionable/Illegal Website.                              | Browsing behavior           |
+| UBA : Browsed to Social Networking Website.                                      | Browsing behavior           |
+| UBA : Browsed to Uncategorized Website.                                          | Browsing behavior           |
+| UBA: User Accessing Risky URL.                                                   | Browsing behavior           |
+| UBA : Anonymous User Accessed a Resource.                                        | Cloud                       |
+| UBA : AWS Console Accessed by Unauthorized User.                                 | Cloud                       |
+| UBA : External User Failed Mailbox Login.                                        | Cloud                       |
+| UBA : Failed to Set Mailbox Audit Logging Bypass.                                | Cloud                       |
+| UBA : Inbox Set to Forward to External Inbox.                                    | Cloud                       |
+| UBA : Internal User Failed Mailbox Login Followed by Success.                    | Cloud                       |
+| UBA : Mailbox Permission Added and Deleted in a Short Period of Time.            | Cloud                       |
+| UBA : Non-Standard User Accessing AWS Resources.                                 | Cloud                       |
+| UBA : Sharing Link Sent to Guest.                                                | Cloud                       |
+| UBA : Sharing Policy Changed or Shared External (SharePoint/OneDrive).           | Cloud                       |
+| UBA : User Added to a Group on SharePoint or OneDrive by Site Admin.             | Cloud                       |
+| UBA : User Failed to be Added to Role.                                           | Cloud                       |
+| UBA : DPAPI Backup Master Key Recovery Attempted.                                | Domain Controller           |
+| UBA : Kerberos Account Enumeration Detected.                                     | Domain Controller           |
+| UBA : Multiple Kerberos Authentication Failures from Same User.                  | Domain Controller           |
+| UBA : Non-Admin Access to Domain Controller.                                     | Domain Controller           |
+| UBA : Pass the Hash.                                                             | Domain Controller           |
+| UBA : Possible Directory Services Enumeration.                                   | Domain Controller           |
+| UBA : Possible SMB Session Enumeration on a Domain Controller.                   | Domain Controller           |
+| UBA : Possible TGT Forgery.                                                      | Domain Controller           |
+| UBA : Possible TGT PAC Forgery.                                                  | Domain Controller           |
+| UBA : Replication Request from a Non-Domain Controller.                          | Domain Controller           |
+| UBA : TGT Ticket Used by Multiple Hosts.                                         | Domain Controller           |
+| UBA : Detect Insecure Or Non-Standard Protocol.                                  | Endpoint                    |
+| UBA : Detect Persistent SSH session.                                             | Endpoint                    |
+| UBA : Internet Settings Modified                                                 | Endpoint                    |
+| UBA : Malware Activity - Registry Modified In Bulk.                              | Endpoint                    |
+| UBA : Netcat Process Detection (Linux).                                          | Endpoint                    |
+| UBA : Netcat Process Detection (Windows).                                        | Endpoint                    |
+| UBA : Process Executed Outside Gold Disk Allowlist (Linux).                      | Endpoint                    |
+| UBA : Process Executed Outside Gold Disk Allowlist (Windows).                    | Endpoint                    |
+| UBA : Ransomware Behavior Detected.                                              | Endpoint                    |
+| UBA : Restricted Program Usage.                                                  | Endpoint                    |
+| UBA : User Installing Suspicious Application.                                    | Endpoint                    |
+| UBA : Volume Shadow Copy Created.                                                | Endpoint                    |
+| UBA : Data Exfiltration by Cloud Services.                                       | Exfiltration                |
+| UBA : Data Exfiltration by Print.                                                | Exfiltration                |
+| UBA : Data Exfiltration by Removable Media.                                      | Exfiltration                |
+| UBA : Data Loss Possible.                                                        | Exfiltration                |
+| UBA : Initial Access Followed by Suspicious Activity.                            | Exfiltration                |
+| UBA : Large Outbound Transfer by High Risk User.                                 | Exfiltration                |
+| UBA : Multiple Blocked File Transfers Followed by a File Transfer.               | Exfiltration                |
+| UBA : Multiple blocked file uploads followed by a successful upload.             | Exfiltration                |
+| UBA : Potentially Compromised Account.                                           | Exfiltration                |
+| UBA : Suspicious Access Followed by Data Exfiltration                            | Exfiltration                |
+| UBA : Suspicious Activity Followed by Exfiltration                               | Exfiltration                |
+| UBA : User Potentially Phished.                                                  | Exfiltration                |
+| UBA : Anomalous Account Created From New Location.                               | Geography                   |
+| UBA : Anomalous Cloud Account Created From New Location.                         | Geography                   |
+| UBA : User Access from Multiple Locations.                                       | Geography                   |
+| UBA : User Access from Prohibited Location.                                      | Geography                   |
+| UBA : User Access from Restricted Location.                                      | Geography                   |
+| UBA : User Geography Change.                                                     | Geography                   |
+| UBA : User Access from Unusual Locations.                                        | Geography                   |
+| UBA : MaaS360 detected device with low encryption level.                         | MaaS360                     |
+| UBA : MaaS360 device out of compliance due to non-roaming data usage.            | MaaS360                     |
+| UBA : MaaS360 device out of compliance due to device being rooted.               | MaaS360                     |
+| UBA : MaaS360 device out of compliance due to encryption level.                  | MaaS360                     |
+| UBA : MaaS360 device out of compliance due to OS version.                        | MaaS360                     |
+| UBA : MaaS360 malicious SMS received.                                            | MaaS360                     |
+| UBA : MaaS360 malicious email received.                                          | MaaS360                     |
+| UBA : MaaS360 URL access blocked.                                                | MaaS360                     |
+| UBA : MaaS360 malware application installed.                                     | MaaS360                     |
+| UBA : MaaS360 malicious URL accessed.                                            | MaaS360                     |
+| UBA : D/DoS Attack Detected.                                                     | Network traffic and attacks |
+| UBA : Honeytoken Activity.                                                       | Network traffic and attacks |
+| UBA : Network Traffic : Capture Monitoring and Analysis Program Usage.           | Network traffic and attacks |
+| UBA : Potential Access to Blocklist Domain.                                      | QRadar DNS Analyzer         |
+| UBA : Potential Access to DGA Domain.                                            | QRadar DNS Analyzer         |
+| UBA : Potential Access to Squatting Domain.                                      | QRadar DNS Analyzer         |
+| UBA : Potential Access to Tunneling Domain.                                      | QRadar DNS Analyzer         |
+| UBA : Detect IOCs For Locky.                                                     | Threat intelligence         |
+| UBA : Detect IOCs for WannaCry.                                                  | Threat intelligence         |
+| UBA : Multiple Sessions to Monitored Log Sources (NIS Directive).                | Threat intelligence         |
+| UBA : ShellBags Modified By Ransomware.                                          | Threat intelligence         |
+| UBA : User Accessing Risky IP Anonymization.                                     | Threat intelligence         |
+| UBA : User Accessing Risky IP Botnet.                                            | Threat intelligence         |
+| UBA : User Accessing Risky IP Dynamic.                                           | Threat intelligence         |
+| UBA : User Accessing Risky IP Malware.                                           | Threat intelligence         |
+| UBA : User Accessing Risky IP Spam.                                              | Threat intelligence         |
