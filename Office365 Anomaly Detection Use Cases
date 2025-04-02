@@ -1,0 +1,69 @@
+**CGR:Office365_Rare and Potentially High-Risk Office Operations**
+- **Log Source**: Unified Audit Log (UAL)
+- **Event Types**: FileAccessed, FileModified, FileShared, FileDeleted
+- **Criteria**:
+  - Unusual file operations outside normal working hours
+  - Operations performed by privileged users on sensitive files
+  - Sudden surge in operations by a specific user
+
+**CGR:Office365_New Executable via Office FileUploaded Operation**
+- **Log Source**: SharePoint, OneDrive Audit Logs
+- **Event Types**: FileUploaded, FileRenamed
+- **Criteria**:
+  - Executable files uploaded (e.g., .exe, .dll, .bat, .cmd, .ps1)
+  - File uploaded to OneDrive or SharePoint and shared externally
+  - File uploaded by a first-time uploader
+
+**CGR:Office365_Multiple Teams Deleted by a Single User**
+- **Log Source**: Microsoft Teams Audit Logs
+- **Event Types**: TeamDeleted
+- **Criteria**:
+  - More than 3 Teams deleted by the same user in a short time
+  - Deletion performed by a non-admin user
+
+**CGR:Office365_File Accessed from Rogue Nation**
+- **Log Source**: Unified Audit Log, Azure AD Sign-In Logs
+- **Event Types**: FileAccessed
+- **Criteria**:
+  - File accessed from a high-risk country (e.g., known malicious IPs, sanctioned nations)
+  - User accessing files from an unusual geo-location compared to their history
+
+**CGR:Office365_User Added and Removed in Short Timeframe in Teams**
+- **Log Source**: Microsoft Teams Audit Logs
+- **Event Types**: MemberAdded, MemberRemoved
+- **Criteria**:
+  - User added and removed within minutes/hours
+  - Repeated pattern from the same admin or service account
+  - Teams membership changes performed by unverified sources
+
+**CGR:Office365_Login Failure Alerts**
+- **Log Source**: Azure AD Sign-In Logs
+- **Event Types**: SignInFailure
+- **Criteria**:
+  - Multiple consecutive failed logins from the same IP or user
+  - Failed login attempts from unusual geo-locations
+  - High failure count on a privileged account
+
+**CGR:Office365_Successful O365 Authentication From Rogue Nations**
+- **Log Source**: Azure AD Sign-In Logs
+- **Event Types**: SignInSuccess
+- **Criteria**:
+  - Successful login from a sanctioned or high-risk country
+  - First-time login from an unusual geo-location
+  - No corresponding MFA challenge or approval
+
+**CGR:Office365_Admin Creating BlindCopy Transport Rule on Office 365**
+- **Log Source**: Exchange Admin Audit Logs
+- **Event Types**: New-TransportRule
+- **Criteria**:
+  - Transport rule created with BCC or auto-forwarding to an external address
+  - Rule created by a non-standard or compromised admin account
+  - Sudden surge of transport rule modifications
+
+**CGR:Office365_Admin Audit Log Config is Disabled on O365**
+- **Log Source**: Office 365 Security & Compliance Center Audit Logs
+- **Event Types**: Set-AdminAuditLogConfig
+- **Criteria**:
+  - Audit logging disabled or modified unexpectedly
+  - Action performed by a non-standard admin account
+  - Log retention period shortened significantly
