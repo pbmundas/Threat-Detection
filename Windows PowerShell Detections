@@ -1,0 +1,78 @@
+**Windows Endpoint-Level Matching Criteria for PowerShell Suspicious Activities**
+
+---
+
+### 1. **CGR:Powershell_Potentially Suspicious Commands Executed**
+- **Log Source**: PowerShell Script Block Logging (Event ID 4104), Sysmon Event ID 1, EDR telemetry
+- **Matching Criteria**:
+  - Presence of encoded/encrypted scripts (`-EncodedCommand`, `Base64` patterns)
+  - Use of `Invoke-Expression`, `iex`, `DownloadString`, `DownloadFile`
+  - Spawning of child processes (e.g., `cmd.exe`, `wscript.exe`, `rundll32.exe`)
+  - Execution from non-standard paths (e.g., `C:\Users\Public`, `AppData`, `Temp`)
+
+### 2. **CGR:Powershell_Policy Change Detected**
+- **Log Source**: Event ID 4103, Event ID 4688, Sysmon Event ID 1
+- **Matching Criteria**:
+  - Changes to execution policy (`Set-ExecutionPolicy` command)
+  - Use of `bypass`, `unrestricted`, or `remotesigned` parameters
+  - Modification of registry keys related to execution policy: `HKLM:\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell\ExecutionPolicy`
+
+### 3. **CGR:Powershell_Data Obfuscation**
+- **Log Source**: PowerShell Script Block Logging (Event ID 4104)
+- **Matching Criteria**:
+  - Use of concatenation (`"Pa"+"ss"+"word"`), character replacement (`[char]67+[char]114`)
+  - Base64 encoded content (`$e = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(...)`)
+  - Use of `Compress-Archive`, `gzip`, `ConvertTo-SecureString` to obscure data
+
+### 4. **CGR:Powershell_ShadowCopy deleted**
+- **Log Source**: Windows Event ID 4663 (File Deletion), Sysmon Event ID 1
+- **Matching Criteria**:
+  - Execution of `vssadmin.exe delete shadows /all /quiet`
+  - `wmic shadowcopy delete` command
+  - Use of `Invoke-WmiMethod` targeting `Win32_ShadowCopy`
+
+### 5. **CGR:Powershell_Domain Enumeration**
+- **Log Source**: PowerShell Script Block Logging (Event ID 4104), Sysmon Event ID 1
+- **Matching Criteria**:
+  - Execution of `Get-DomainController`, `Get-ADUser`, `Get-NetDomain`, `nltest`
+  - Use of `net group /domain`, `net user /domain`, `dsquery * -filter`
+
+### 6. **CGR:Powershell_Using Memory as Backing Store**
+- **Log Source**: Sysmon Event ID 10 (Process Access), Event ID 4104
+- **Matching Criteria**:
+  - Use of `System.Reflection.Assembly::Load`, `VirtualAlloc`, `WriteProcessMemory`
+  - Invocation of `Invoke-ReflectivePEInjection`, `sRDI`
+  - Process injection techniques (`NtCreateSection`, `ZwMapViewOfSection`)
+
+### 7. **CGR:Powershell_Creating Thread Mutex**
+- **Log Source**: Sysmon Event ID 11 (Create Mutex)
+- **Matching Criteria**:
+  - Use of `New-Object System.Threading.Mutex`
+  - Presence of known malware mutexes (`Global\<mutex_name>`)
+
+### 8. **CGR:Powershell_Allowing Inbound Traffic in Firewall Rule**
+- **Log Source**: Windows Firewall Event Logs (Event ID 2004, 2005)
+- **Matching Criteria**:
+  - Execution of `New-NetFirewallRule -Action Allow`
+  - Modification of firewall rules using `netsh advfirewall`
+
+### 9. **CGR:Powershell_Processing Stream of Data**
+- **Log Source**: Event ID 4104, Sysmon Event ID 1
+- **Matching Criteria**:
+  - Use of `[System.IO.StreamReader]::ReadToEnd()`, `ConvertTo-Json` with large data sets
+  - Encoding or compressing files (`ConvertTo-Base64`, `GZipStream`)
+
+### 10. **CGR:Powershell_Mimikatz Activity Detected**
+- **Log Source**: Event ID 4104, Sysmon Event ID 1, Event ID 4624 (Logon Events)
+- **Matching Criteria**:
+  - Execution of `Invoke-Mimikatz`, `sekurlsa::logonpasswords`, `kerberos::tickets`
+  - Use of `Invoke-ReflectivePEInjection`, `Invoke-DllInjection`
+  - Dumping LSASS process memory (`rundll32.exe comsvcs.dll, MiniDump`)
+
+### 11. **CGR:Powershell_Mailsniper Invoke Functions**
+- **Log Source**: Event ID 4104, Sysmon Event ID 1
+- **Matching Criteria**:
+  - Execution of `Invoke-SelfSearch`, `Invoke-GlobalSearch`, `Invoke-EnumerateGlobalCatalog`
+  - Targeting `Outlook.Application`, `Get-ItemProperty -Path HKCU:\Software\Microsoft\Office\`
+  - Interaction with Exchange Web Services (`EWS.ManagedAPI`, `FindItems`, `Bind`)
+
