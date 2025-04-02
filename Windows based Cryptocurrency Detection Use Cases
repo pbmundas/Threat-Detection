@@ -1,0 +1,185 @@
+Here are **Windows telemetry-based detection criteria** for detecting cryptocurrency mining activities. These detections are based on **Windows Event Logs, Sysmon, PowerShell logs, and network telemetry** that can be leveraged for SIEM (e.g., Splunk, Sentinel, Elastic Security).  
+
+---
+
+## **1. Cryptocurrency Mining Traffic**
+**Data Source:** Windows Firewall Logs, Sysmon (Event ID 3 - Network Connection), Network Traffic Analysis (NTA)  
+**Matching Criteria:**  
+- **Destination IP** → Matches known mining pools  
+- **Destination Port** → 3333, 4444, 5555 (Typical mining ports)  
+- **Protocol** → Stratum (Mining protocol)  
+
+**Telemetry Query (Splunk Example)**
+```spl
+index=firewall OR index=sysmon EventID=3
+| where dest_ip IN ("192.168.1.1", "198.51.100.0") OR dest_port IN (3333, 4444, 5555)
+```
+
+---
+
+## **2. Cryptocurrency Mining Threat Name**
+**Data Source:** Windows Event Logs (Event ID 4688 - Process Creation), Sysmon (Event ID 1)  
+**Matching Criteria:**  
+- **Process Name** → `xmrig.exe`, `miner.exe`, `ccminer.exe`  
+- **Parent Process** → `cmd.exe`, `powershell.exe`, `wscript.exe`  
+
+**Telemetry Query (Sigma-like)**
+```yaml
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+      - "\xmrig.exe"
+      - "\miner.exe"
+      - "\ccminer.exe"
+    ParentImage|contains:
+      - "\cmd.exe"
+      - "\powershell.exe"
+      - "\wscript.exe"
+  condition: selection
+```
+
+---
+
+## **3. Cryptocurrency Mining File Hash**
+**Data Source:** Sysmon (Event ID 1 - Process Creation, Event ID 15 - File Creation)  
+**Matching Criteria:**  
+- **File Hash** → Matches known mining malware hashes  
+
+**Telemetry Query (Elastic Query Example)**
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "terms": { "file.hash.sha256": ["d41d8cd98f00b204e9800998ecf8427e", "5a5d9e36f36b5d6e454c8e2cbf17f3d7"] } }
+      ]
+    }
+  }
+}
+```
+
+---
+
+## **4. Successful Communication to Cryptocurrency Mining Host**
+**Data Source:** Sysmon (Event ID 3 - Network Connection), Firewall Logs  
+**Matching Criteria:**  
+- **Destination Domain** → `pool.minexmr.com`, `xmrpool.eu`, `cryptonight.cc`  
+
+**Telemetry Query (Sigma Rule)**
+```yaml
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  selection:
+    DestinationHostname|contains:
+      - "pool.minexmr.com"
+      - "xmrpool.eu"
+      - "cryptonight.cc"
+  condition: selection
+```
+
+---
+
+## **5. Exploit Attempt Followed by Cryptocurrency Mining**
+**Data Source:** Sysmon (Event ID 1 - Process Creation, Event ID 3 - Network Connection)  
+**Matching Criteria:**  
+- **Stage 1 (Exploit Activity)**  
+  - Process: `mshta.exe`, `powershell.exe`  
+  - CommandLine: `Invoke-WebRequest`, `DownloadFile`  
+- **Stage 2 (Mining Software Execution)**  
+  - Process: `xmrig.exe`, `miner.exe`  
+
+**Telemetry Query (Windows Event Logs)**
+```yaml
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection1:
+    Image|endswith:
+      - "\mshta.exe"
+      - "\powershell.exe"
+    CommandLine|contains:
+      - "Invoke-WebRequest"
+      - "DownloadFile"
+  selection2:
+    Image|endswith:
+      - "\xmrig.exe"
+      - "\miner.exe"
+  timeframe: 5m
+  condition: selection1 followed_by selection2
+```
+
+---
+
+## **6. Cryptocurrency Mining Process**
+**Data Source:** Sysmon (Event ID 1 - Process Creation), Windows Security Logs (Event ID 4688)  
+**Matching Criteria:**  
+- **Process Name** → `xmrig.exe`, `miner.exe`, `nicehash.exe`  
+
+**Telemetry Query (Splunk Example)**
+```spl
+index=sysmon EventID=1 Image="*xmrig.exe" OR Image="*miner.exe" OR Image="*nicehash.exe"
+```
+
+---
+
+## **7. In-Browser Cryptojacking - JavaScript File Hash**
+**Data Source:** Windows Defender Logs, Sysmon (Event ID 15 - File Creation)  
+**Matching Criteria:**  
+- **File Hash** → Matches known cryptojacking JavaScript files  
+
+**Telemetry Query (Sigma Rule)**
+```yaml
+logsource:
+  category: file_access
+  product: windows
+detection:
+  selection:
+    Hash:
+      - "e99a18c428cb38d5f260853678922e03"
+      - "098f6bcd4621d373cade4e832627b4f6"
+  condition: selection
+```
+
+---
+
+## **8. Cryptocurrency Mining Command Execution**
+**Data Source:** Windows Security Logs (Event ID 4688), Sysmon (Event ID 1 - Process Creation)  
+**Matching Criteria:**  
+- **Command Execution**  
+  - Process: `powershell.exe`, `cmd.exe`  
+  - CommandLine contains `-o stratum+tcp://`, `-u wallet_address`, `xmrig --donate-level`  
+
+**Telemetry Query (Splunk)**
+```spl
+index=sysmon EventID=1 Image="*powershell.exe" OR Image="*cmd.exe"
+| where CommandLine LIKE "%-o stratum+tcp://%" OR CommandLine LIKE "%-u wallet_address%"
+```
+
+---
+
+## **9. In-Browser Cryptojacking - JavaScript Filename**
+**Data Source:** Sysmon (Event ID 15 - File Creation), Defender Logs  
+**Matching Criteria:**  
+- **JavaScript Filename** → `crypto.js`, `min.js`, `coinhive.js`  
+
+**Telemetry Query (Windows Defender Logs)**
+```yaml
+logsource:
+  category: file_access
+  product: windows
+detection:
+  selection:
+    Filename|endswith:
+      - "crypto.js"
+      - "min.js"
+      - "coinhive.js"
+  condition: selection
+```
+
+---
