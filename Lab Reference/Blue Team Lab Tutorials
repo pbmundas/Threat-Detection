@@ -1,0 +1,13 @@
+SOC Automation Project setup - Configuring TheHive and Wazuh, Attack emulations with ART and Automation with Shuffle SOAR - https://medium.com/shuffle-automation/getting-started-with-shuffle-an-open-source-soar-platform-part-2-1d7c67a64244
+-----------------------------------------------------------------------------------------------------------
+Building Host PC
+Installing VMware Workstation as hypervisor
+Configuring pfSense firewall for Network Segmentation & Security
+Configuring Security Onion as an all-in-one IDS, Security Monitoring, and Log Management solution
+Configuring Kali Linux as an attack machine
+Configuring a Windows Server as a Domain Controller
+Configuring Windows desktops
+Configuring Splunk
+Ubuntu/CentOS/Metasploitable/DVWA/Vulnhub machines: All these are potential Linux machines that can be added to the network for exploitation, detection, or monitoring purposes.
+https://cyberwoxacademy.com/building-a-cybersecurity-homelab-for-detection-monitoring/
+-----------------------------------------------------------------------------------------------------------
